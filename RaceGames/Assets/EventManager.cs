@@ -60,7 +60,7 @@ public class EventManager : MonoBehaviour
     List<EventSession> sessions;
     List<EventHit> hits;
     List<EventRoundEnd> roundEnds;
-    List<EventError> eventError;
+    List<EventError> errors;
 
 
     // Start is called before the first frame update
@@ -101,15 +101,41 @@ public class EventManager : MonoBehaviour
         sessions.Add(newEvent);
     }
 
-    public void AddHitEvent(bool sessiontype)
+    public void AddHitEvent(int obstacleId)
     {
         EventHit newEvent = new EventHit();
 
         newEvent.sessionID = sessionID;
         newEvent.timeStamp = Time.realtimeSinceStartup;
-
-
+        newEvent.obstacleId = obstacleId;
 
         hits.Add(newEvent);
     }
+
+    public void AddRoundEndEvent(int round, string roundtype)
+    {
+        EventRoundEnd newEvent = new EventRoundEnd();
+
+        newEvent.sessionID = sessionID;
+        newEvent.timeStamp = Time.realtimeSinceStartup;
+
+        newEvent.round = round;
+        newEvent.roundType = roundtype;
+
+        roundEnds.Add(newEvent);
+    }
+
+    public void AddErrorEvent(ErrorType error)
+    {
+        EventError newEvent = new EventError();
+
+        newEvent.sessionID = sessionID;
+        newEvent.timeStamp = Time.realtimeSinceStartup;
+
+        newEvent.errorType = error;
+
+        errors.Add(newEvent);
+    }
+
+    
 }
