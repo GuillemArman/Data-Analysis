@@ -9,6 +9,9 @@ public class EventManager : MonoBehaviour
     int sessionID = 0;
     public string playerId;
 
+
+    int round = 0;
+
     class Event
     {
         public int sessionID = 0;
@@ -18,7 +21,7 @@ public class EventManager : MonoBehaviour
 
     class EventPosition : Event
     {
-        public uint round = 0;
+        public int round = 0;
 
         public Vector3 pos;
         public Quaternion rot;
@@ -66,6 +69,12 @@ public class EventManager : MonoBehaviour
     void Start()
     {
         sessionID = Random.Range(0, 99999);
+
+        positions = new List<EventPosition>();
+        sessions = new List<EventSession>();
+        hits = new List<EventHit>();
+        roundEnds = new List<EventRoundEnd>();
+        errors = new List<EventError>();
     }
 
     // Update is called once per frame
@@ -83,6 +92,7 @@ public class EventManager : MonoBehaviour
         newEvent.pos = _pos;
         newEvent.rot = _rot;
         newEvent.vel = _vel;
+        newEvent.round = round;
 
         positions.Add(newEvent);
     }
