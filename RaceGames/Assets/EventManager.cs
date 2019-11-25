@@ -55,7 +55,6 @@ public class EventManager : MonoBehaviour
         public ErrorType errorType;
     }
 
-
     List<EventPosition> positions;
     List<EventSession> sessions;
     List<EventHit> hits;
