@@ -10,7 +10,7 @@ public class EventManager : MonoBehaviour
     public string playerId;
 
 
-    int round = 0;
+    public int round = 0;
 
     class Event
     {
@@ -45,7 +45,6 @@ public class EventManager : MonoBehaviour
     class EventRoundEnd : Event
     {
         public int round = 0;
-        public string roundType;
     }
 
     public enum ErrorType
@@ -75,11 +74,19 @@ public class EventManager : MonoBehaviour
         hits = new List<EventHit>();
         roundEnds = new List<EventRoundEnd>();
         errors = new List<EventError>();
+
+        AddSessionEvent(false);
     }
 
     // Update is called once per frame
     void Update()
     {       
+    }
+
+    void OnApplicationQuit()
+    {
+
+        AddSessionEvent(true);
     }
 
     public void AddPositionEvent(Vector3 _pos, Quaternion _rot, Vector3 _vel)
@@ -121,7 +128,7 @@ public class EventManager : MonoBehaviour
         hits.Add(newEvent);
     }
 
-    public void AddRoundEndEvent(int round, string roundtype)
+    public void AddRoundEndEvent(int round)
     {
         EventRoundEnd newEvent = new EventRoundEnd();
 
@@ -129,7 +136,7 @@ public class EventManager : MonoBehaviour
         newEvent.timeStamp = Time.realtimeSinceStartup;
 
         newEvent.round = round;
-        newEvent.roundType = roundtype;
+
 
         roundEnds.Add(newEvent);
     }

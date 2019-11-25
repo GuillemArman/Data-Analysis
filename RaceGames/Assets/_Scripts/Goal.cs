@@ -33,4 +33,9 @@ public class Goal : MonoBehaviour {
         yield return new WaitForSeconds(3);
         _finished = false;
     }
+
+    public bool GetFinished()
+    {
+        return _finished;
+    }
 }
