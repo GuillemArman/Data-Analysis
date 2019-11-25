@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
+    Exporter exporter;
 
     int sessionID = 0;
     public string playerId;
@@ -12,14 +13,14 @@ public class EventManager : MonoBehaviour
 
     public int round = 0;
 
-    class Event
+    public class Event
     {
         public int sessionID = 0;
         public float timeStamp = 0;
 
     }
 
-    class EventPosition : Event
+   public class EventPosition : Event
     {
         public int round = 0;
 
@@ -28,7 +29,7 @@ public class EventManager : MonoBehaviour
         public Vector3 vel;
     }
 
-    class EventSession : Event
+    public class EventSession : Event
     {
         public string playerID;
 
@@ -36,23 +37,23 @@ public class EventManager : MonoBehaviour
         public bool sessionType = false;
     }
 
-    class EventHit : Event
+    public class EventHit : Event
     {
         // 1 - Last Obstacle Number : int
         public int obstacleId = 0;
     }
 
-    class EventRoundEnd : Event
+    public class EventRoundEnd : Event
     {
         public int round = 0;
     }
 
-    public enum ErrorType
+    public  enum ErrorType
     {
         FALL_OFF,
         STUCK
     }
-    class EventError : Event
+    public class EventError : Event
     {
         public ErrorType errorType;
     }
@@ -67,6 +68,8 @@ public class EventManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        exporter = GetComponent<Exporter>();
+
         sessionID = Random.Range(0, 99999);
 
         positions = new List<EventPosition>();
@@ -85,8 +88,11 @@ public class EventManager : MonoBehaviour
 
     void OnApplicationQuit()
     {
+        
 
         AddSessionEvent(true);
+        
+
     }
 
     public void AddPositionEvent(Vector3 _pos, Quaternion _rot, Vector3 _vel)
