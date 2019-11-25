@@ -45,9 +45,99 @@ public class Exporter : MonoBehaviour
             Save(str_positions);
 
         }
+        
+    }
 
-        
-        
+    public void Save_Sessions(List<EventManager.EventPosition> sessions)
+    {
+
+        string[] title = new string[1];
+        title[0] = "Sessions";
+        Save(title);
+
+        string[] str_sessions = new string[(13)];
+
+        for (int i = 0; i < sessions.Count; i++)
+        {
+            int j = 0;
+
+            
+            str_sessions[j++] = sessions[i].sessionID.ToString();
+           
+
+            Save(str_sessions);
+
+        }
+
+    }
+
+    public void Save_Hits(List<EventManager.EventPosition> hits)
+    {
+
+        string[] title = new string[1];
+        title[0] = "Hits";
+        Save(title);
+
+        string[] str_hits = new string[(13)];
+
+        for (int i = 0; i < hits.Count; i++)
+        {
+            int j = 0;
+
+
+            str_hits[j++] = hits[i].sessionID.ToString();
+
+
+            Save(str_hits);
+
+        }
+
+    }
+
+    public void Save_roundEnd(List<EventManager.EventPosition> roundEnd)
+    {
+
+        string[] title = new string[1];
+        title[0] = "RoundEnd";
+        Save(title);
+
+        string[] str_roundend = new string[(13)];
+
+        for (int i = 0; i < roundEnd.Count; i++)
+        {
+            int j = 0;
+
+
+            str_roundend[j++] = roundEnd[i].sessionID.ToString();
+
+
+            Save(str_roundend);
+
+        }
+
+    }
+
+    public void Save_Errors(List<EventManager.EventPosition> errors)
+    {
+
+        string[] title = new string[1];
+        title[0] = "Errors";
+        Save(title);
+
+        string[] str_errors = new string[(13)];
+
+        for (int i = 0; i < errors.Count; i++)
+        {
+            int j = 0;
+
+
+            str_errors[j++] = errors[i].sessionID.ToString();
+
+
+            Save(str_errors);
+
+        }
+
     }
 
 
