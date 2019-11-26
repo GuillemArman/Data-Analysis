@@ -27,6 +27,10 @@ public class EventManager : MonoBehaviour
         public Vector3 pos;
         public Quaternion rot;
         public Vector3 vel;
+
+        public string MySerialize() {
+            return "Saved_data";
+        }
     }
 
     public class EventSession : Event
@@ -88,7 +92,12 @@ public class EventManager : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        
+
+        exporter.Save_Pos(positions);
+        exporter.Save_Sessions(sessions);
+        exporter.Save_Hits(hits);
+        exporter.Save_roundEnd(roundEnds);
+        exporter.Save_Errors(errors);
 
         AddSessionEvent(true);
         

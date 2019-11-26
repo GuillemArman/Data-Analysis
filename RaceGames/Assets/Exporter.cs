@@ -48,21 +48,21 @@ public class Exporter : MonoBehaviour
         
     }
 
-    public void Save_Sessions(List<EventManager.EventPosition> sessions)
+    public void Save_Sessions(List<EventManager.EventSession> sessions)
     {
 
         string[] title = new string[1];
         title[0] = "Sessions";
         Save(title);
 
-        string[] str_sessions = new string[(13)];
+        string[] str_sessions = new string[(1)];
 
         for (int i = 0; i < sessions.Count; i++)
         {
             int j = 0;
 
             
-            str_sessions[j++] = sessions[i].sessionID.ToString();
+            str_sessions[j++] = sessions[i].playerID;
            
 
             Save(str_sessions);
@@ -71,21 +71,21 @@ public class Exporter : MonoBehaviour
 
     }
 
-    public void Save_Hits(List<EventManager.EventPosition> hits)
+    public void Save_Hits(List<EventManager.EventHit> hits)
     {
 
         string[] title = new string[1];
         title[0] = "Hits";
         Save(title);
 
-        string[] str_hits = new string[(13)];
+        string[] str_hits = new string[(1)];
 
         for (int i = 0; i < hits.Count; i++)
         {
             int j = 0;
 
 
-            str_hits[j++] = hits[i].sessionID.ToString();
+            str_hits[j++] = hits[i].obstacleId.ToString();
 
 
             Save(str_hits);
@@ -94,21 +94,21 @@ public class Exporter : MonoBehaviour
 
     }
 
-    public void Save_roundEnd(List<EventManager.EventPosition> roundEnd)
+    public void Save_roundEnd(List<EventManager.EventRoundEnd> roundEnd)
     {
 
         string[] title = new string[1];
         title[0] = "RoundEnd";
         Save(title);
 
-        string[] str_roundend = new string[(13)];
+        string[] str_roundend = new string[(1)];
 
         for (int i = 0; i < roundEnd.Count; i++)
         {
             int j = 0;
 
 
-            str_roundend[j++] = roundEnd[i].sessionID.ToString();
+            str_roundend[j++] = roundEnd[i].round.ToString();
 
 
             Save(str_roundend);
@@ -117,21 +117,21 @@ public class Exporter : MonoBehaviour
 
     }
 
-    public void Save_Errors(List<EventManager.EventPosition> errors)
+    public void Save_Errors(List<EventManager.EventError> errors)
     {
 
         string[] title = new string[1];
         title[0] = "Errors";
         Save(title);
 
-        string[] str_errors = new string[(13)];
+        string[] str_errors = new string[(1)];
 
         for (int i = 0; i < errors.Count; i++)
         {
             int j = 0;
 
 
-            str_errors[j++] = errors[i].sessionID.ToString();
+            str_errors[j++] = errors[i].errorType.ToString();
 
 
             Save(str_errors);
@@ -187,7 +187,7 @@ public class Exporter : MonoBehaviour
     private string getPath()
     {
 #if UNITY_EDITOR
-        return Application.dataPath + "/CSV/" + "Saved_data.csv";
+        return Application.dataPath + "Assets" + "Saved_data.csv";
 #else
         return Application.dataPath +"/"+"Saved_data.csv";
 #endif
