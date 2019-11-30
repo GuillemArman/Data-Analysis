@@ -20,6 +20,7 @@ public class EventManager : MonoBehaviour
 
     }
 
+    [System.Serializable]
    public class EventPosition : Event
     {
         public int round = 0;
@@ -92,6 +93,8 @@ public class EventManager : MonoBehaviour
 
     void OnApplicationQuit()
     {
+        AddSessionEvent(true);
+
 
         exporter.Save_Pos(positions);
         exporter.Save_Sessions(sessions);
@@ -99,8 +102,8 @@ public class EventManager : MonoBehaviour
         exporter.Save_roundEnd(roundEnds);
         exporter.Save_Errors(errors);
 
-        AddSessionEvent(true);
-        
+
+  
 
     }
 

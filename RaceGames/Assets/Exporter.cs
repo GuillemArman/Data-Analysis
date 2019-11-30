@@ -18,55 +18,44 @@ public class Exporter : MonoBehaviour
     public void Save_Pos(List <EventManager.EventPosition> positions)
     {
 
-        string[] title = new string[1];
-        title[0] = "Positions";
-        Save(title);
-       
-        string[] str_positions = new string[(13)];
-
-        for (int i = 0; i<positions.Count; i++)
+        for (int i = 0; i < positions.Count; i++)
         {
-            int j = 0;
+            string str = "";
+            str += positions[i].sessionID.ToString() + ",";
+            str += positions[i].timeStamp.ToString() + ",";
+            str += positions[i].round.ToString() + ",";
 
-            str_positions[j++] = positions[i].sessionID.ToString();
-            str_positions[j++] = positions[i].timeStamp.ToString();
-            str_positions[j++] = positions[i].round.ToString();
-            str_positions[j++] = positions[i].pos.x.ToString();
-            str_positions[j++] = positions[i].pos.y.ToString();
-            str_positions[j++] = positions[i].pos.z.ToString();
-            str_positions[j++] = positions[i].rot.x.ToString();
-            str_positions[j++] = positions[i].rot.y.ToString();
-            str_positions[j++] = positions[i].rot.z.ToString();
-            str_positions[j++] = positions[i].rot.w.ToString();
-            str_positions[j++] = positions[i].vel.x.ToString();
-            str_positions[j++] = positions[i].vel.y.ToString();
-            str_positions[j++] = positions[i].vel.z.ToString();
+            str += positions[i].pos.x.ToString() + ",";
+            str += positions[i].pos.y.ToString() + ",";
+            str += positions[i].pos.z.ToString() + ",";
 
-            Save(str_positions);
+            str += positions[i].rot.x.ToString() + ",";
+            str += positions[i].rot.y.ToString() + ",";
+            str += positions[i].rot.z.ToString() + ",";
+            str += positions[i].rot.w.ToString() + ",";
 
-        }
-        
+            str += positions[i].vel.x.ToString() + ",";
+            str += positions[i].vel.y.ToString() + ",";
+            str += positions[i].vel.z.ToString();
+
+            SaveLine(str, "Data/Positions.csv");
+        }      
     }
 
     public void Save_Sessions(List<EventManager.EventSession> sessions)
     {
 
-        string[] title = new string[1];
-        title[0] = "Sessions";
-        Save(title);
-
-        string[] str_sessions = new string[(1)];
-
         for (int i = 0; i < sessions.Count; i++)
         {
-            int j = 0;
 
-            
-            str_sessions[j++] = sessions[i].playerID;
-           
+            string str_sessions = "";
+            str_sessions += sessions[i].sessionID.ToString() + ",";
+            str_sessions += sessions[i].playerID + ",";
+            str_sessions += sessions[i].timeStamp.ToString() + ",";
+            str_sessions += sessions[i].sessionType.ToString();
 
-            Save(str_sessions);
 
+            SaveLine(str_sessions, "Data/Sessions.csv");
         }
 
     }
@@ -74,44 +63,32 @@ public class Exporter : MonoBehaviour
     public void Save_Hits(List<EventManager.EventHit> hits)
     {
 
-        string[] title = new string[1];
-        title[0] = "Hits";
-        Save(title);
-
-        string[] str_hits = new string[(1)];
-
         for (int i = 0; i < hits.Count; i++)
         {
-            int j = 0;
 
+            string str_hits = "";
+            str_hits += hits[i].sessionID.ToString() + ",";
+            str_hits += hits[i].timeStamp.ToString() + ",";
+            str_hits += hits[i].obstacleId.ToString();
 
-            str_hits[j++] = hits[i].obstacleId.ToString();
-
-
-            Save(str_hits);
+            SaveLine(str_hits, "Data/Hits.csv");
 
         }
-
     }
 
     public void Save_roundEnd(List<EventManager.EventRoundEnd> roundEnd)
     {
 
-        string[] title = new string[1];
-        title[0] = "RoundEnd";
-        Save(title);
-
-        string[] str_roundend = new string[(1)];
-
         for (int i = 0; i < roundEnd.Count; i++)
         {
-            int j = 0;
+            string str_roundend = "";
 
 
-            str_roundend[j++] = roundEnd[i].round.ToString();
+            str_roundend += roundEnd[i].sessionID.ToString() + ",";
+            str_roundend += roundEnd[i].round.ToString() + ",";
+            str_roundend += roundEnd[i].timeStamp.ToString() ;
 
-
-            Save(str_roundend);
+            SaveLine(str_roundend, "Data/RoundEnd.csv");
 
         }
 
@@ -120,21 +97,18 @@ public class Exporter : MonoBehaviour
     public void Save_Errors(List<EventManager.EventError> errors)
     {
 
-        string[] title = new string[1];
-        title[0] = "Errors";
-        Save(title);
-
-        string[] str_errors = new string[(1)];
 
         for (int i = 0; i < errors.Count; i++)
         {
-            int j = 0;
+
+            string str_errors = "";
+
+            str_errors += errors[i].sessionID.ToString() + ",";
+            str_errors += errors[i].timeStamp.ToString() + ",";
+            str_errors += errors[i].errorType.ToString() + ",";
 
 
-            str_errors[j++] = errors[i].errorType.ToString();
-
-
-            Save(str_errors);
+            SaveLine(str_errors, "Data/Errors.csv");
 
         }
 
@@ -180,6 +154,17 @@ public class Exporter : MonoBehaviour
         outStream.Close();
     }
 
+    public void SaveLine(string str, string filename)
+    {
+
+        string filePath = Application.dataPath + "/" + filename;
+
+        StreamWriter outStream = System.IO.File.AppendText(filePath);
+        outStream.WriteLine(str);
+        outStream.Close();
+
+    }
+
    
 
 
@@ -187,7 +172,7 @@ public class Exporter : MonoBehaviour
     private string getPath()
     {
 #if UNITY_EDITOR
-        return Application.dataPath + "Assets" + "Saved_data.csv";
+        return Application.dataPath + "/Saved_data.csv";
 #else
         return Application.dataPath +"/"+"Saved_data.csv";
 #endif
