@@ -20,7 +20,6 @@ public class EventManager : MonoBehaviour
 
     }
 
-    [System.Serializable]
    public class EventPosition : Event
     {
         public int round = 0;

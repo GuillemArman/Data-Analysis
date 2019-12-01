@@ -10,6 +10,8 @@ public class Exporter : MonoBehaviour
     private List<string[]> rowData = new List<string[]>();
     EventManager eventmanager;
 
+    string delimiter = ";";
+
     public void Start()
     {
         eventmanager = GetComponent<EventManager>();
@@ -21,21 +23,21 @@ public class Exporter : MonoBehaviour
         for (int i = 0; i < positions.Count; i++)
         {
             string str = "";
-            str += positions[i].sessionID.ToString() + ",";
-            str += positions[i].timeStamp.ToString() + ",";
-            str += positions[i].round.ToString() + ",";
+            str += positions[i].sessionID.ToString() + delimiter;
+            str += positions[i].timeStamp.ToString() + delimiter;
+            str += positions[i].round.ToString() + delimiter;
 
-            str += positions[i].pos.x.ToString() + ",";
-            str += positions[i].pos.y.ToString() + ",";
-            str += positions[i].pos.z.ToString() + ",";
+            str += positions[i].pos.x.ToString() + delimiter;
+            str += positions[i].pos.y.ToString() + delimiter;
+            str += positions[i].pos.z.ToString() + delimiter;
 
-            str += positions[i].rot.x.ToString() + ",";
-            str += positions[i].rot.y.ToString() + ",";
-            str += positions[i].rot.z.ToString() + ",";
-            str += positions[i].rot.w.ToString() + ",";
+            str += positions[i].rot.x.ToString() + delimiter;
+            str += positions[i].rot.y.ToString() + delimiter;
+            str += positions[i].rot.z.ToString() + delimiter;
+            str += positions[i].rot.w.ToString() + delimiter;
 
-            str += positions[i].vel.x.ToString() + ",";
-            str += positions[i].vel.y.ToString() + ",";
+            str += positions[i].vel.x.ToString() + delimiter;
+            str += positions[i].vel.y.ToString() + delimiter;
             str += positions[i].vel.z.ToString();
 
             SaveLine(str, "Data/Positions.csv");
@@ -49,9 +51,9 @@ public class Exporter : MonoBehaviour
         {
 
             string str_sessions = "";
-            str_sessions += sessions[i].sessionID.ToString() + ",";
-            str_sessions += sessions[i].playerID + ",";
-            str_sessions += sessions[i].timeStamp.ToString() + ",";
+            str_sessions += sessions[i].sessionID.ToString() + delimiter;
+            str_sessions += sessions[i].playerID + delimiter;
+            str_sessions += sessions[i].timeStamp.ToString() + delimiter;
             str_sessions += sessions[i].sessionType.ToString();
 
 
@@ -67,8 +69,8 @@ public class Exporter : MonoBehaviour
         {
 
             string str_hits = "";
-            str_hits += hits[i].sessionID.ToString() + ",";
-            str_hits += hits[i].timeStamp.ToString() + ",";
+            str_hits += hits[i].sessionID.ToString() + delimiter;
+            str_hits += hits[i].timeStamp.ToString() + delimiter;
             str_hits += hits[i].obstacleId.ToString();
 
             SaveLine(str_hits, "Data/Hits.csv");
@@ -84,8 +86,8 @@ public class Exporter : MonoBehaviour
             string str_roundend = "";
 
 
-            str_roundend += roundEnd[i].sessionID.ToString() + ",";
-            str_roundend += roundEnd[i].round.ToString() + ",";
+            str_roundend += roundEnd[i].sessionID.ToString() + delimiter;
+            str_roundend += roundEnd[i].round.ToString() + delimiter;
             str_roundend += roundEnd[i].timeStamp.ToString() ;
 
             SaveLine(str_roundend, "Data/RoundEnd.csv");
@@ -103,9 +105,9 @@ public class Exporter : MonoBehaviour
 
             string str_errors = "";
 
-            str_errors += errors[i].sessionID.ToString() + ",";
-            str_errors += errors[i].timeStamp.ToString() + ",";
-            str_errors += errors[i].errorType.ToString() + ",";
+            str_errors += errors[i].sessionID.ToString() + delimiter;
+            str_errors += errors[i].timeStamp.ToString() + delimiter;
+            str_errors += errors[i].errorType.ToString();
 
 
             SaveLine(str_errors, "Data/Errors.csv");
@@ -158,7 +160,7 @@ public class Exporter : MonoBehaviour
     {
 
         string filePath = Application.dataPath + "/" + filename;
-
+       
         StreamWriter outStream = System.IO.File.AppendText(filePath);
         outStream.WriteLine(str);
         outStream.Close();
