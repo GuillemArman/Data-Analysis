@@ -96,13 +96,14 @@ public class EventManager : MonoBehaviour
 
 
         exporter.Save_Pos(positions);
+        HeatMapManager.Instance.CreateHeatMap(positions);
         exporter.Save_Sessions(sessions);
         exporter.Save_Hits(hits);
         exporter.Save_roundEnd(roundEnds);
         exporter.Save_Errors(errors);
 
 
-  
+        Debug.Log("Application ending after " + Time.time + " seconds");
 
     }
 

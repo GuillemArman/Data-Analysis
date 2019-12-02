@@ -23,10 +23,10 @@ public class Importer : MonoBehaviour
         errors = new List<EventManager.EventError>();
 
         ReadPositions();
-        ReadSessions();
-        ReadHits();
-        ReadRoundEnd();
-        ReadErrors();
+        //ReadSessions();
+        //ReadHits();
+        //ReadRoundEnd();
+        //ReadErrors();
     }
 
     // Update is called once per frame
