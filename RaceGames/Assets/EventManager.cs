@@ -87,7 +87,13 @@ public class EventManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {       
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+
+            HeatMapManager.Instance.CreateHeatMap(positions);
+
+        }
     }
 
     void OnApplicationQuit()
@@ -96,7 +102,7 @@ public class EventManager : MonoBehaviour
 
 
         exporter.Save_Pos(positions);
-        HeatMapManager.Instance.CreateHeatMap(positions);
+
         exporter.Save_Sessions(sessions);
         exporter.Save_Hits(hits);
         exporter.Save_roundEnd(roundEnds);
