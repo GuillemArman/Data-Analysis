@@ -12,6 +12,7 @@ public class Exporter : MonoBehaviour
 
     string delimiter = ";";
 
+    public bool titles = false;
     public void Start()
     {
         eventmanager = GetComponent<EventManager>();
@@ -19,6 +20,28 @@ public class Exporter : MonoBehaviour
 
     public void Save_Pos(List <EventManager.EventPosition> positions)
     {
+        if (titles)
+        {
+            string str_sessions_title = "";
+            str_sessions_title += "Session ID" + delimiter;
+            str_sessions_title += "Time Stamp" + delimiter;
+            str_sessions_title += "Round" + delimiter;
+
+            str_sessions_title += "Pos_X" + delimiter;
+            str_sessions_title += "Pos_Y" + delimiter;
+            str_sessions_title += "Pos_Z" + delimiter;
+
+            str_sessions_title += "ROT_X" + delimiter;
+            str_sessions_title += "ROT_Y" + delimiter;
+            str_sessions_title += "ROT_Z" + delimiter;
+            str_sessions_title += "ROT_W" + delimiter;
+
+            str_sessions_title += "VEL_X" + delimiter;
+            str_sessions_title += "VEL_Y" + delimiter;
+            str_sessions_title += "VEL_Z";
+
+            SaveLine(str_sessions_title, "Data/Positions.csv");
+        }
 
         for (int i = 0; i < positions.Count; i++)
         {
@@ -46,6 +69,17 @@ public class Exporter : MonoBehaviour
 
     public void Save_Sessions(List<EventManager.EventSession> sessions)
     {
+        if (titles)
+        {
+            string str_sessions_title = "";
+            str_sessions_title += "Session ID" + delimiter;
+            str_sessions_title += "Player ID" + delimiter;
+            str_sessions_title += "Time Stamp" + delimiter;
+            str_sessions_title += "Session Type";
+
+
+            SaveLine(str_sessions_title, "Data/Sessions.csv");
+        }
 
         for (int i = 0; i < sessions.Count; i++)
         {
@@ -64,6 +98,16 @@ public class Exporter : MonoBehaviour
 
     public void Save_Hits(List<EventManager.EventHit> hits)
     {
+        if (titles)
+        {
+            string str_sessions_title = "";
+            str_sessions_title += "Session ID" + delimiter;
+            str_sessions_title += "Time Stamp" + delimiter;
+            str_sessions_title += "Obstacle ID";
+
+
+            SaveLine(str_sessions_title, "Data/Hits.csv");
+        }
 
         for (int i = 0; i < hits.Count; i++)
         {
@@ -80,6 +124,17 @@ public class Exporter : MonoBehaviour
 
     public void Save_roundEnd(List<EventManager.EventRoundEnd> roundEnd)
     {
+        if (titles)
+        {
+            string str_sessions_title = "";
+            str_sessions_title += "Session ID" + delimiter;
+            str_sessions_title += "Round" + delimiter;
+            str_sessions_title += "Time Stamp";
+
+
+
+            SaveLine(str_sessions_title, "Data/RoundEnd.csv");
+        }
 
         for (int i = 0; i < roundEnd.Count; i++)
         {

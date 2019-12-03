@@ -1311,7 +1311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f519d97439b0b47bc1c7899da4e507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerId: guillemaj
+  playerId: polcar
   round: 0
 --- !u!114 &1719778161
 MonoBehaviour:
@@ -1325,6 +1325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56dedd827547ae468df1a61b38b090c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  titles: 0
 --- !u!114 &1719778162
 MonoBehaviour:
   m_ObjectHideFlags: 0
